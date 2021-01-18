@@ -1,5 +1,6 @@
 <html>
   <body>
+    <div id="test" />
     <picture>
       <source
         srcset="https://togekk1.github.io/avif-test/A001_11191644_S115.avif"
@@ -10,7 +11,9 @@
       />
     </picture>
     <script>
-      document.body.appendChild(document.createTextNode(navigator.userAgent));
+      document
+        .getElementById("test")
+        .appendChild(document.createTextNode(navigator.userAgent));
     </script>
   </body>
 </html>
