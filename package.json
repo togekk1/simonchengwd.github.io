@@ -8,8 +8,6 @@
     "postpublish": "pinst --enable"
   },
   "devDependencies": {
-    "@assemblyscript/loader": "^0.18.14",
-    "assemblyscript": "^0.18.14",
     "pinst": "^2.0.0"
   }
 }
