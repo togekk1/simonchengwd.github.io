@@ -5,6 +5,13 @@ __metadata:
   version: 4
   cacheKey: 7
 
+"@assemblyscript/loader@npm:^0.18.14":
+  version: 0.18.14
+  resolution: "@assemblyscript/loader@npm:0.18.14"
+  checksum: 5c71062be00a35765b5d5d8fb62191d570f8fb6d82504a19e2ca93ff039a6f0704c99496d74703bd7f055c1bd588f9f0c9b8797d1c9f9cb6497eb1cbd4374d93
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:1":
   version: 1.1.1
   resolution: "abbrev@npm:1.1.1"
@@ -207,6 +214,19 @@ __metadata:
   dependencies:
     safer-buffer: ~2.1.0
   checksum: 5743ace942e2faa0b72f3b14bf1826509c5ca707ea150c10520f52b04f90aa715cee4370ec2e6279ce1ceb7d3c472ca33270124e90b495bea4c9b02f41b9d8ac
+  languageName: node
+  linkType: hard
+
+"assemblyscript@npm:^0.18.14":
+  version: 0.18.14
+  resolution: "assemblyscript@npm:0.18.14"
+  dependencies:
+    binaryen: 100.0.0
+    long: ^4.0.0
+  bin:
+    asc: bin/asc
+    asinit: bin/asinit
+  checksum: dc6772fdda0eaec18c102fbc569347ef38cf0cc87d78080e5841cb03af4d8482642b430fc51157ea61350bdb939712d72367bfe2b7d6a2706aa216aa8a854d2c
   languageName: node
   linkType: hard
 
@@ -987,6 +1007,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"binaryen@npm:100.0.0":
+  version: 100.0.0
+  resolution: "binaryen@npm:100.0.0"
+  bin:
+    wasm-opt: bin/wasm-opt
+  checksum: 8e0b0a3120a3f0597af277900940ea2a16588f20d0841215442581e8f3a21cc5c64cc564c8c1f5a3d8c4b9b318b78ae6000469ae7e63c28ba3f50c8e8e8295c1
+  languageName: node
+  linkType: hard
+
 "bindings@npm:^1.5.0":
   version: 1.5.0
   resolution: "bindings@npm:1.5.0"
@@ -1165,6 +1194,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "brunch-app@workspace:."
   dependencies:
+    "@assemblyscript/loader": ^0.18.14
+    assemblyscript: ^0.18.14
     auto-reload-brunch: ^2
     babel-brunch: ~6.0
     babel-preset-latest: ^6
@@ -3218,6 +3249,13 @@ fsevents@^1.2.7:
     colorette: ~1.1
     native-notifier: ~0.1.6
   checksum: f7e8c47f47f08dec10749b7040812f5b570ed39cb7c4250e87a59bfd9bd10ece4e52c0f8fd07935adeaf4e3c40c14ce38c6a21e95aaeffe5c0e59572175cf827
+  languageName: node
+  linkType: hard
+
+"long@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "long@npm:4.0.0"
+  checksum: 9cebc1ee8b9ea15278c977f61250ac41becdf7216104905f0d198c147ed2a7a090a2d83bb212878d3dc3ccb0199e6428862f848ec4b0ecfeab4dfe24eccf21b3
   languageName: node
   linkType: hard
 
