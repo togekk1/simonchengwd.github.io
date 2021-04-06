@@ -1,31 +1,33 @@
 use yew_services::{ConsoleService};
-use yew_functional::{function_component, use_state};
+use yew_functional::{function_component, use_state, use_effect};
 use yew::prelude::*;
 use std::rc::Rc;
 
 fn main() {
-    ConsoleService::info("Hello, world!");
+    // ConsoleService::info("Hello, world!");
     App::<UseState>::new().mount_to_body();
 }
 
 #[function_component(UseState)]
 pub fn state() -> Html {
     let (
-        counter,
-        set_counter,
-    ) = use_state(|| 0);
-    let onclick = {
-        let counter = Rc::clone(&counter);
-        Callback::from(move |_| set_counter(*counter + 1))
-    };
+        clicked,
+        set_clicked,
+    ) = use_state(|| false);
+
+    let clicked_clone = clicked.clone();
+    let onclick = Callback::from(move |_| set_clicked(!*clicked_clone));
+
+    let clicked_clone = clicked.clone();
+    use_effect(move || {
+        ConsoleService::info(&format!("{}", clicked_clone));
+        || {}
+    });
 
     html! {
-        <div>
-            <button onclick=onclick>{ "Increment value" }</button>
-            <p>
-                <b>{ "Current value: " }</b>
-                { counter }
-            </p>
-        </div>
+        <>
+            <button class=format!("py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md focus:outline-none{test}", test = if *clicked { " animate-ping" } else { "" }) onclick=onclick>{ "Increment value" }</button>
+            { "test" }
+        </>
     }
 }
