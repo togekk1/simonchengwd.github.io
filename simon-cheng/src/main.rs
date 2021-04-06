@@ -1,7 +1,6 @@
 use yew_services::{ConsoleService};
 use yew_functional::{function_component, use_state, use_effect};
 use yew::prelude::*;
-use std::rc::Rc;
 
 fn main() {
     // ConsoleService::info("Hello, world!");
