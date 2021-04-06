@@ -17,12 +17,6 @@ pub fn state() -> Html {
     let clicked_clone = clicked.clone();
     let onclick = Callback::from(move |_| set_clicked(!*clicked_clone));
 
-    let clicked_clone = clicked.clone();
-    use_effect(move || {
-        ConsoleService::info(&format!("{}", clicked_clone));
-        || {}
-    });
-
     html! {
         <>
             <button class=format!("py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md focus:outline-none{test}", test = if *clicked { " animate-ping" } else { "" }) onclick=onclick>{ "Increment value" }</button>
