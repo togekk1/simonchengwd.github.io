@@ -1,5 +1,5 @@
-use yew_services::{ConsoleService};
-use yew_functional::{function_component, use_state, use_effect};
+// use yew_services::{ConsoleService};
+use yew_functional::{function_component, use_state};
 use yew::prelude::*;
 
 fn main() {
@@ -16,6 +16,12 @@ pub fn state() -> Html {
 
     let clicked_clone = clicked.clone();
     let onclick = Callback::from(move |_| set_clicked(!*clicked_clone));
+
+    // let clicked_clone = clicked.clone();
+    // use_effect(move || {
+    //     ConsoleService::info(&format!("{}", clicked_clone));
+    //     || {}
+    // });
 
     html! {
         <>
