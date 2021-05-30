@@ -1,0 +1,1 @@
+onmessage=function(event){var sab=event.data.sab;console.log(sab)};
