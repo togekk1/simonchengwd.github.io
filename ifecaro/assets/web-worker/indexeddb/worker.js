@@ -1,1 +1,69 @@
-onmessage=async e=>{try{const t=JSON.parse(e.data),{db_version:o,database_name:r,objectstores:s}=Array.isArray(t)?t[0]:t,n=indexedDB.open(r,o);n.onsuccess=e=>{const o=e.target.result,a=o.transaction(s,"readwrite");function r(e){const{action:o,objectstore_name:r,key:t,value:s}=e,n=a.objectStore(r),c=[()=>n.get(t),()=>n.put(s,t),()=>n.count(),()=>n.getAll(),()=>n.delete(t)][o]();c.onsuccess=function(){var e=c.result;[0,2,3].includes(o)&&postMessage(2===o?e:JSON.stringify(e))},c.onerror=e=>{console.error(e)}}Array.isArray(t)?t.forEach(e=>{r(e)}):r(t),a.oncomplete=function(){o.close(),close()},a.onerror=function(e){console.error(e),o.close(),close()}},n.onerror=function(e){console.error(e),close()},n.onupgradeneeded=r=>{s.forEach(e=>{const o=r.target.result;o.objectStoreNames.contains(e)||o.createObjectStore(e)})}}catch(e){console.error(e),close()}};
+onmessage = async (event) => {
+    try {
+        const data = JSON.parse(event.data);
+        const { db_version, database_name, objectstores, } = Array.isArray(data) ? data[0] : data;
+        const request = indexedDB.open(database_name, db_version);
+        request.onsuccess = (event) => {
+            const db = event.target.result;
+            const _transaction = db.transaction(objectstores, "readwrite");
+            Array.isArray(data)
+                ? data.forEach((data_each) => {
+                    fetch_db(data_each);
+                })
+                : fetch_db(data);
+            _transaction.oncomplete = function () {
+                // console.log("All transaction finished");
+                db.close();
+                close();
+            };
+            _transaction.onerror = function (error) {
+                console.error(error);
+                db.close();
+                close();
+            };
+            function fetch_db(data) {
+                const { action, objectstore_name, key, value, } = data;
+                const objectStore = _transaction.objectStore(objectstore_name);
+                const request = [
+                    () => objectStore.get(key),
+                    () => objectStore.put(value, key),
+                    () => objectStore.count(),
+                    () => objectStore.getAll(),
+                    () => objectStore.delete(key),
+                ][action]();
+                request.onsuccess = function () {
+                    // const action_msg = [
+                    //   "Reading",
+                    //   "Writing",
+                    //   "Counting",
+                    //   "Reading all in",
+                    //   "Deleting",
+                    // ][action];
+                    // console.log(`${action_msg} ${objectstore_name} successfully`);
+                    const result = request.result;
+                    [0, 2, 3].includes(action) &&
+                        postMessage(action === 2 ? result : JSON.stringify(result));
+                };
+                request.onerror = (error) => {
+                    console.error(error);
+                };
+            }
+        };
+        request.onerror = function (error) {
+            // console.log(`${action_msg} DB failed`);
+            console.error(error);
+            close();
+        };
+        request.onupgradeneeded = (event) => {
+            objectstores.forEach((objectstore_name) => {
+                const db = event.target.result;
+                !db.objectStoreNames.contains(objectstore_name) &&
+                    db.createObjectStore(objectstore_name);
+            });
+        };
+    }
+    catch (err) {
+        console.error(err);
+        close();
+    }
+};

@@ -1,7 +1,9 @@
 {
   "name": "indexeddb",
-  "packageManager": "yarn@3.0.1",
   "scripts": {
-    "build": "yarn dlx uglify-js worker.js -c -m -o worker.js"
+    "build": "pnpm uglifyjs worker.js -c -m -o worker.js"
+  },
+  "dependencies": {
+    "uglify-js": "^3.17.4"
   }
 }
